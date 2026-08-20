@@ -1,0 +1,25 @@
+<template>
+
+    <lightning-card title="High Revenue Accounts">
+
+        <div class="slds-p-around_medium">
+
+            <lightning-button label="Show High Revenue Accounts" variant="brand" onclick={showHighRevenueAccounts}>
+            </lightning-button>
+
+            <template lwc:if={accounts.length}>
+
+                <div class="slds-m-top_medium">
+
+                    <lightning-datatable key-field="Id" data={accounts} columns={columns} hide-checkbox-column>
+                    </lightning-datatable>
+
+                </div>
+
+            </template>
+
+        </div>
+
+    </lightning-card>
+
+</template>

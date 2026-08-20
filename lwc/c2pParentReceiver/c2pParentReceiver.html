@@ -1,0 +1,12 @@
+<template>
+    <lightning-card title="Parent Receiver (C2P)">
+        <div class="slds-var-m-around_medium">
+            <div>Message is received: <b>{message}</b></div>
+            <c-c2p-child-sender onsend={handleMessage}>
+
+            </c-c2p-child-sender>
+        </div>
+
+    </lightning-card>
+
+</template>

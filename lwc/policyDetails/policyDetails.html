@@ -1,0 +1,31 @@
+<template>
+    <lightning-card title="Policy Details" icon-name="standard:insurance">
+
+        <div class="slds-p-around_medium">
+            <lightning-button label="Get Policy Details" variant="brand" onclick={handleGetPolicies}>
+            </lightning-button>
+        </div>
+
+        <template if:true={showPolicies}>
+
+            <template if:true={policies.length}>
+
+                <div class="slds-p-around_medium">
+
+                    <lightning-datatable key-field="Id" data={policies} columns={columns} hide-checkbox-column>
+                    </lightning-datatable>
+
+                </div>
+
+            </template>
+
+            <template if:false={policies.length}>
+                <div class="slds-p-around_medium">
+                    No Policy Details found.
+                </div>
+            </template>
+
+        </template>
+
+    </lightning-card>
+</template>

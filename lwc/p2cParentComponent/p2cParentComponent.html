@@ -1,0 +1,10 @@
+<template>
+    <lightning-card title="Parent Component">
+        <div class="slds-var-m-around_medium">
+            <!-- Button to pass the data -->
+            <lightning-button label="Click here to send data" onclick={handleClick}></lightning-button>
+            <c-p2c-child-component message-received={messageToChild}></c-p2c-child-component>
+        </div>
+    </lightning-card>
+
+</template>

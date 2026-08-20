@@ -1,0 +1,31 @@
+<template>
+    <lightning-card title="Welcome Message">
+        <div class="slds-m-around_medium">
+            <div>{message}</div>
+        </div>
+
+    </lightning-card>
+
+    <lightning-card title="Data Binding With Input">
+        <div class="slds-var-m-around_medium">
+            <lightning-input label="Enter your name" type="text" onchange={handleTextChange}></lightning-input>
+            <div>We are Learning about {name}!</div>
+        </div>
+    </lightning-card>
+
+    <lightning-card title="Data Binding With 2 Properties">
+        <div class="slds-var-m-around_medium">
+            <lightning-input label="Enter your course" type="text" onchange={handleCourseChange}></lightning-input>
+            <div>We are learning {course} and {anotherCourse}!</div>
+        </div>
+    </lightning-card>
+
+
+    <lightning-card title="Data Binding With Object">
+        <div class="slds-var-m-around_medium">
+            <lightning-input label="Enter Company Location" type="text" onchange={handleObjectChange}></lightning-input>
+            <div>My Company Name is {companyDetails.name} , My Working Location is {companyDetails.location} , Age is
+                {companyDetails.age}</div>
+        </div>
+    </lightning-card>
+</template>

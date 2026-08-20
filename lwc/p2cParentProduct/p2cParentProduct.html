@@ -1,0 +1,11 @@
+<template>
+    <lightning-card title="Prodect Component">
+        <div class="slds-var-m-around_medium">
+            <lightning-combobox label="Products" options={products} placeholder="Select Product" onchange={handleChage}>
+            </lightning-combobox>
+            <c-p2c-child-product selectedproduct={selectedItem}>
+
+            </c-p2c-child-product>
+        </div>
+    </lightning-card>
+</template>

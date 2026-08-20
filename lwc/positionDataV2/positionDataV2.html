@@ -1,0 +1,41 @@
+<template>
+    <lightning-card title="Imperative Apex Call">
+        <div class="slds-var-m-around_medium">
+            <lightning-button label="New Position" variant="success" onclick={handleNewPosition}>
+            </lightning-button>
+            <lightning-button label="Open Positions" variant="brand" onclick={handleOpenPositions}>
+            </lightning-button>
+            <lightning-button label="Closed Positions" variant="destructive" onclick={handleClosedPositions}>
+            </lightning-button>
+        </div>
+
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+            aria-labelledby="element-with-table-label other-element-with-table-label">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date Opened</th>
+                    <th>Date Closed</th>
+                    <th>Status</th>
+                    <th>Department</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template lwc:if={positions}>
+                    <template for:each={positions} for:item="pos">
+                        <tr key={pos.Id}>
+                            <td>{pos.Name}</td>
+                            <td>{pos.Date_Opened__c}</td>
+                            <td>{pos.Date_Closed__c}</td>
+                            <td>{pos.Status__c}</td>
+                            <td>{pos.Department__c}</td>
+                            <td>{pos.Location__c}</td>
+                        </tr>
+                    </template>
+                </template>
+            </tbody>
+        </table>
+    </lightning-card>
+
+</template>

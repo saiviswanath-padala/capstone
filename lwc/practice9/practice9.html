@@ -1,0 +1,25 @@
+<template>
+
+    <lightning-card title="Open Cases">
+
+        <div class="slds-p-around_medium">
+
+            <lightning-button label="Show Open Cases" variant="brand" onclick={showOpenCases}>
+            </lightning-button>
+
+            <template lwc:if={cases.length}>
+
+                <div class="slds-m-top_medium">
+
+                    <lightning-datatable key-field="Id" data={cases} columns={columns} hide-checkbox-column>
+                    </lightning-datatable>
+
+                </div>
+
+            </template>
+
+        </div>
+
+    </lightning-card>
+
+</template>

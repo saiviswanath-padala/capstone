@@ -1,0 +1,24 @@
+<template>
+    <lightning-card title="Lightning Tabset">
+        <!-- Simple Calculator -->
+        <lightning-tabset variant="scoped">
+            <lightning-tab label="Simple Calculator">
+                <c-simple-calculator></c-simple-calculator>
+            </lightning-tab>
+            <!-- Wire with rpoerty -->
+            <lightning-tab label="Wire with property">
+                <c-opportunity-comp-v1></c-opportunity-comp-v1>
+            </lightning-tab>
+
+            <!-- Wire with function -->
+            <lightning-tab label="Wire with Function">
+                <c-opportunity-comp-v2></c-opportunity-comp-v2>
+            </lightning-tab>
+
+            <!-- Imperative call -->
+            <lightning-tab label="Imperative Apex">
+                <c-opportunity-comp-v3></c-opportunity-comp-v3>
+            </lightning-tab>
+        </lightning-tabset>
+    </lightning-card>
+</template>

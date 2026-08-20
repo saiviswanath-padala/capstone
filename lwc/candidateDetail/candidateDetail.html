@@ -1,0 +1,28 @@
+<template>
+    <lightning-card title="Candidate Detail">
+        <div class="slds-var-m-around_medium">
+            <template lwc:if={candidate}>
+                <!-- View and Edit Button -->
+                <lightning-button label="View" onclick={handleView} class="slds-var-m-right_x-small"></lightning-button>
+                <lightning-button label="Edit" onclick={handleEdit} class="slds-var-m-right_x-small"></lightning-button>
+
+                <!-- Candidate Detail Data -->
+                <p><b>First Name : </b>{candidate.First_Name__c}</p>
+                <p><b>Last Name : </b>{candidate.Last_Name__c}</p>
+                <p><b>Email : </b>{candidate.Email__c}</p>
+                <p><b>Mobile : </b>{candidate.Mobile__c}</p>
+                <p><b>Street Address 1 : </b>{candidate.Street_Address_1__c}</p>
+                <p><b>Street Address 2 : </b>{candidate.Street_Address_2__c}</p>
+                <p><b>State/Province : </b>{candidate.State_Province__c}</p>
+
+                <div class="slds-var-p-top_medium">
+                    <c-candidate-map city={candidate.City__c} street1={candidate.Street_Address_1__c} street2={candidate.Street_Address_2__c} state={candidate.State_Province__c}
+                        country={candidate.Country__c}>
+
+                    </c-candidate-map>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+
+</template>

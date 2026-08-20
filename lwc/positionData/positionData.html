@@ -1,0 +1,30 @@
+<template>
+    <lightning-card title="Position Data with Functions">
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+            aria-labelledby="element-with-table-label other-element-with-table-label">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date Opened</th>
+                    <th>Date Closed</th>
+                    <th>Department</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template lwc:if={positions}>
+                    <template for:each={positions} for:item="pos">
+                        <tr key={pos.Id}>
+                            <td>{pos.Name}</td>
+                            <td>{pos.Date_Opened__c}</td>
+                            <td>{pos.Date_Closed__c}</td>
+                            <td>{pos.Department__c}</td>
+                            <td>{pos.Location__c}</td>
+                        </tr>
+                    </template>
+                </template>
+            </tbody>
+        </table>
+    </lightning-card>
+
+</template>

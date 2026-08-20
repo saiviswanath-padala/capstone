@@ -1,0 +1,22 @@
+<template>
+    <lightning-card title="Vehicle Details">
+
+        <template if:true={vehicles}>
+
+                <div class="slds-p-around_medium">
+
+                    <lightning-datatable key-field="Id" data={vehicles} columns={columns}>
+                    </lightning-datatable>
+
+                </div>
+
+        </template>
+
+        <template if:true={error}>
+            <p>{error}</p>
+        </template>
+
+    </lightning-card>
+</template>
+
+

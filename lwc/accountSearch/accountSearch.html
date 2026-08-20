@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Account Search">
+        <div class="slds-var-m-around_medium">
+            <lightning-input label="Account Search" onchange={handleInputChange}></lightning-input>
+
+            <!-- Data Table -->
+            <template lwc:if={accounts}>
+                <lightning-datatable key-field="Id" data={accounts} columns={columns} max-row-selection="1"
+                    onrowselection={handleRowSelection}>
+                </lightning-datatable>
+            </template>
+        </div>
+    </lightning-card>
+</template>

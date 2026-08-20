@@ -1,0 +1,33 @@
+<template>
+    <lightning-card title="Conditional Rendering">
+        <div class="slds-var-m-around_medium">
+            <lightning-input label="Enter Value" onchange={handleInputChange}></lightning-input>
+
+            <template lwc:if={helloMessage}>
+                <div> Hurray!! you have typed it correctly</div>
+            </template>
+            <template lwc:else>
+                <div>Enter Hello to See the data</div>
+            </template>
+        </div>
+    </lightning-card>
+
+    <!-- Conditional Rendering With Button -->
+
+     <lightning-card title="Conditional Rendering With Button">
+        <div class="slds-var-m-around_medium">
+            <lightning-button label="Click" onclick={handleShowData}></lightning-button>
+
+            <template lwc:if={showData}>
+                <div>Now You can see the data</div>
+            </template>
+
+            <template lwc:else>
+                <div>Please Chick To See the data</div>
+            </template>
+        </div>
+    </lightning-card>
+
+
+    
+</template>

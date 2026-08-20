@@ -1,0 +1,43 @@
+<template>
+
+    <lightning-card title="Student Performance Summary">
+
+        <div class="slds-p-around_medium">
+
+            <div class="slds-grid slds-wrap slds-gutters slds-m-bottom_medium">
+
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning-card title="Total Students">
+                        <div class="slds-p-around_medium slds-text-heading_medium">
+                            {totalStudents}
+                        </div>
+                    </lightning-card>
+                </div>
+
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning-card title="Average Marks">
+                        <div class="slds-p-around_medium slds-text-heading_medium">
+                            {averageMarks}
+                        </div>
+                    </lightning-card>
+                </div>
+
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning-card title="Students Above 75">
+                        <div class="slds-p-around_medium slds-text-heading_medium">
+                            {studentsAbove75}
+                        </div>
+                    </lightning-card>
+                </div>
+
+            </div>
+
+            <lightning-datatable key-field="Id" data={students} columns={columns} hide-checkbox-column>
+                >
+            </lightning-datatable>
+
+        </div>
+
+    </lightning-card>
+
+</template>

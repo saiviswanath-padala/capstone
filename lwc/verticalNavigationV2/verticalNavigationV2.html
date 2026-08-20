@@ -1,0 +1,26 @@
+<template>
+
+    <lightning-card title="Vertical Navigation">
+        <lightning-vertical-navigation selected-item={selectedItem} onselect={handleSelect}>
+    
+            <!-- Browse Section -->
+            <lightning-vertical-navigation-section label="Browse">
+                <lightning-vertical-navigation-item label="Candidate Search" name="candidatesearch">
+    
+                </lightning-vertical-navigation-item>
+                <lightning-vertical-navigation-item label=" Calculator" name="calculator">
+    
+                </lightning-vertical-navigation-item>
+            </lightning-vertical-navigation-section>
+    
+            <!-- Deals Section -->
+            <lightning-vertical-navigation-section label="Position">
+                <lightning-vertical-navigation-item label=" All" name="all">
+    
+                </lightning-vertical-navigation-item>
+            </lightning-vertical-navigation-section>
+        </lightning-vertical-navigation>
+    
+    </lightning-card>
+    
+</template>

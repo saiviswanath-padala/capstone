@@ -1,0 +1,25 @@
+<template>
+
+    <lightning-card title="Hot Accounts">
+
+        <div class="slds-p-around_medium">
+
+            <lightning-button label="Show Hot Accounts" variant="brand" onclick={showHotAccounts}>
+            </lightning-button>
+
+            <template lwc:if={accounts.length}>
+
+                <div class="slds-m-top_medium">
+
+                    <lightning-datatable key-field="Id" data={accounts} columns={columns} hide-checkbox-column>
+                    </lightning-datatable>
+
+                </div>
+
+            </template>
+
+        </div>
+
+    </lightning-card>
+
+</template>

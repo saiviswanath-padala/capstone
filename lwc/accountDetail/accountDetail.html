@@ -1,0 +1,25 @@
+<template>
+    <lightning-card title="Account Detail">
+        <div class="slds-var-m-around_medium">
+            <template lwc:if={account}>
+                <!-- View and Edit Button -->
+                <lightning-button label="View" onclick={handleView} class="slds-var-m-right_x-small"></lightning-button>
+                <lightning-button label="Edit" onclick={handleEdit} class="slds-var-m-right_x-small"></lightning-button>
+
+                <!-- Account Detail Data -->
+                <p><b>Name: </b>{account.Name}</p>
+                <p><b>Industry: </b>{account.Industry}</p>
+                <p><b>AnnualRevenue: </b>{account.AnnualRevenue}</p>
+                <p><b>BillingCity: </b>{account.BillingCity}</p>
+                <p><b>BillingCountry: </b>{account.BillingCountry}</p>
+
+                <div class="slds-var-p-top_medium">
+                    <c-account-map city={account.BillingCity} state={account.BillingState} country={account.BillingCountry}>
+                
+                    </c-account-map>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+
+</template>

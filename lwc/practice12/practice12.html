@@ -1,0 +1,26 @@
+<template>
+
+    <lightning-card title="This Month Opportunities">
+
+        <div class="slds-p-around_medium">
+
+            <lightning-button label="Show This Month Opportunities" variant="brand"
+                onclick={showThisMonthOpportunities}>
+            </lightning-button>
+
+            <template lwc:if={opportunities.length}>
+
+                <div class="slds-m-top_medium">
+
+                    <lightning-datatable key-field="Id" data={opportunities} columns={columns} hide-checkbox-column>
+                    </lightning-datatable>
+
+                </div>
+
+            </template>
+
+        </div>
+
+    </lightning-card>
+
+</template>

@@ -1,0 +1,12 @@
+<template>
+       <lightning-card title="Opportunity Detail">
+        <template if:true={opportunity}>
+            <p><b>Name:</b> {opportunity.Name}</p>
+            <p><b>Stage:</b> {opportunity.StageName}</p>
+            <p><b>Close Date:</b> {opportunity.CloseDate}</p>
+            <p><b>Amount:</b> {opportunity.Amount}</p>
+            <p><b>Account:</b> {opportunity.Account.Name}</p>
+            <p><b>Owner:</b> {opportunity.Owner.Name}</p>
+        </template>
+    </lightning-card>
+</template>

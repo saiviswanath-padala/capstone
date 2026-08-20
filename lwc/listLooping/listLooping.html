@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="List Looping">
+        <div class="slds-var-m-around_medium">
+            <template for:each={salesforceCourses} for:item="crs">
+                <div key={crs.id}>
+                    <p>Course: <b>{crs.course}</b></p>
+                    <p>Type: <b>{crs.type}</b></p>
+                </div>
+                
+            </template>
+        </div>
+    </lightning-card>
+</template>

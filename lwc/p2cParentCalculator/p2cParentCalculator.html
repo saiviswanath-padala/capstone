@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="Parent Calculator Component">
+        <div class="slds-var-m-around_medium">
+            <!-- Inputs for calculation -->
+            <lightning-input label="Num1" type="number" onchange={handleNum1Change}></lightning-input>
+
+            <lightning-input label="Num2" type="number" onchange={handleNum2Change}></lightning-input>
+
+            <lightning-button label="Calculate" onclick={handleCalculate}></lightning-button>
+
+            <template lwc:if={sendData}>
+                <c-p2c-child-calculator num1={val1} num2={val2}>
+
+                </c-p2c-child-calculator>
+            </template>
+
+        </div>
+    </lightning-card>
+
+</template>

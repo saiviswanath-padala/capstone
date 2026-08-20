@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Candidate Search">
+        <div class="slds-var-m-around_medium">
+            <lightning-input label="Candidate Search" onchange={handleInputChange}></lightning-input>
+
+            <!-- Data Table -->
+            <template lwc:if={candidateList}>
+                <lightning-datatable key-field="Id" data={candidateList} columns={columns} max-row-selection="1"
+                    onrowselection={handleRowSelection}>
+                </lightning-datatable>
+            </template>
+        </div>
+    </lightning-card>
+</template>

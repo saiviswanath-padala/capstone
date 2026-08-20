@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Lightning DataTable">
+        <div class="slds-var-m-around_medium">
+            <lightning-button label="Delete" variant="destructive" onclick={handleDelete}></lightning-button>
+            <lightning-datatable 
+                            key-field="Id" 
+                            data={oppList} 
+                            columns={columns} 
+                            onrowselection={handleRowSelection}
+                            max-row-selection="1">
+            </lightning-datatable>
+        </div>
+    </lightning-card>
+</template>

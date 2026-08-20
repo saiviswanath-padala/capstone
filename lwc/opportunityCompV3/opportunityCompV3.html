@@ -1,0 +1,40 @@
+<template>
+    <lightning-card title="Imperative Apex Call">
+        <div class="slds-var-m-around_medium">
+            <lightning-button label="Won Deals" variant="success" onclick={handleWonDeals}>
+            </lightning-button>
+            <lightning-button label="Lost Deals" variant="destructive" onclick={handleLostDeals}>
+            </lightning-button>
+        </div>
+
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+            aria-labelledby="element-with-table-label other-element-with-table-label">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>StageName</th>
+                    <th>CloseDate</th>
+                    <th>Amount</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <template lwc:if={oppList}>
+                    <template for:each={oppList} for:item="opp">
+                        <tr key={opp.Id}>
+                            <td>{opp.Name}</td>
+                            <td>{opp.StageName}</td>
+                            <td>{opp.CloseDate}</td>
+                            <td>{opp.Amount}</td>
+
+                        </tr>
+                    </template>
+                </template>
+            </tbody>
+        </table>
+
+    </lightning-card>
+
+
+
+</template>

@@ -1,0 +1,30 @@
+<template>
+    <lightning-card title="Opportunity Data with Functions">
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+            aria-labelledby="element-with-table-label other-element-with-table-label">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>StageName</th>
+                    <th>CloseDate</th>
+                    <th>Amount</th>
+                    <th>Comission</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template lwc:if={opportunities}>
+                    <template for:each={opportunities} for:item="opp">
+                        <tr key={opp.Id}>
+                            <td>{opp.Name}</td>
+                            <td>{opp.StageName}</td>
+                            <td>{opp.CloseDate}</td>
+                            <td>{opp.Amount}</td>
+                            <td>{opp.comission}</td>
+                        </tr>
+                    </template>
+                </template>
+            </tbody>
+        </table>
+    </lightning-card>
+
+</template>
