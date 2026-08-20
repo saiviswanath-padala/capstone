@@ -146,7 +146,7 @@ public without sharing class CinemaInspectionTriggerHandler {
                 ActionPlanType,
                 TargetEntityType
             FROM ActionPlanTemplate
-            WHERE Name = 'Cinema Fire Safety Remediation'
+            WHERE Name = 'Cinema Fire Safety Remediations'
             LIMIT 1
         ];
 
@@ -167,7 +167,7 @@ public without sharing class CinemaInspectionTriggerHandler {
                 Version
             FROM ActionPlanTemplateVersion
             WHERE ActionPlanTemplateId = :template.Id
-            AND Status = 'Published'
+            AND Status = 'Final'
             ORDER BY Version DESC
             LIMIT 1
         ];
@@ -232,10 +232,6 @@ public without sharing class CinemaInspectionTriggerHandler {
             remediationPlan.ActionPlanTemplateVersionId =
                 templateVersion.Id;
 
-            /*
-             * Use the Action Plan Type from the template.
-             * This avoids hard-coding the restricted picklist.
-             */
             remediationPlan.ActionPlanType =
                 template.ActionPlanType;
 

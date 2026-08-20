@@ -1,4 +1,4 @@
-global without sharing class CinemaWeeklyMaintenanceScheduler
+global without sharing class SmartCinemaMaintenanceScheduler
     implements Schedulable {
 
     global void execute(
