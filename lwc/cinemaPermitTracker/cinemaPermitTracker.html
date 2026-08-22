@@ -1,0 +1,297 @@
+<template>
+
+    <lightning-card title="Cinema Permit Tracker" icon-name="standard:approval">
+
+        <div class="tracker-container">
+
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading permit">
+                </lightning-spinner>
+            </template>
+
+            <template if:true={errorMessage}>
+                <div class="error-box">
+                    {errorMessage}
+                </div>
+            </template>
+
+            <template if:true={permit}>
+
+                <!-- Permit Header -->
+                <div class="permit-header">
+
+                    <div>
+                        <div class="section-label">
+                            Permit Application
+                        </div>
+
+                        <div class="permit-number">
+                            {permit.permitNumber}
+                        </div>
+                    </div>
+
+                    <span class={statusBadgeClass}>
+                        {permit.status}
+                    </span>
+
+                </div>
+
+                <!-- Basic Details -->
+                <div class="details-grid">
+
+                    <div class="detail-item">
+                        <span class="label">
+                            Permit Type
+                        </span>
+
+                        <span class="value">
+                            {permit.permitType}
+                        </span>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="label">
+                            Application Category
+                        </span>
+
+                        <span class="value">
+                            {permit.applicationCategory}
+                        </span>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="label">
+                            Cinema
+                        </span>
+
+                        <span class="value">
+                            {permit.cinemaName}
+                        </span>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="label">
+                            Applicant
+                        </span>
+
+                        <span class="value">
+                            {permit.applicantName}
+                        </span>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="label">
+                            Submission Date
+                        </span>
+
+                        <span class="value">
+                            <lightning-formatted-date-time value={permit.submissionDate} year="numeric" month="short"
+                                day="2-digit">
+                            </lightning-formatted-date-time>
+                        </span>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="label">
+                            Fee
+                        </span>
+
+                        <span class="value">
+                            <lightning-formatted-number value={permit.feeAmount} format-style="currency"
+                                currency-code="INR">
+                            </lightning-formatted-number>
+                        </span>
+                    </div>
+
+                </div>
+
+                <!-- Progress Timeline -->
+                <div class="timeline-section">
+
+                    <div class="section-title">
+                        Application Progress
+                    </div>
+
+                    <div class="timeline">
+
+                        <template for:each={timelineStages} for:item="stage">
+
+                            <div key={stage.name} class={stage.cssClass}>
+
+                                <div class="stage-circle">
+                                    <template if:true={stage.completed}>
+                                        ✓
+                                    </template>
+
+                                    <template if:false={stage.completed}>
+                                        {stage.number}
+                                    </template>
+                                </div>
+
+                                <div class="stage-label">
+                                    {stage.name}
+                                </div>
+
+                            </div>
+
+                        </template>
+
+                    </div>
+
+                </div>
+
+                <!-- Rejection -->
+                <template if:true={isRejected}>
+
+                    <div class="rejection-box">
+
+                        <div class="rejection-title">
+                            Permit Application Rejected
+                        </div>
+
+                        <div class="rejection-reason">
+                            {permit.rejectionReason}
+                        </div>
+
+                        <lightning-button variant="brand" label="Raise Grievance" onclick={openGrievanceModal}>
+                        </lightning-button>
+
+                    </div>
+
+                </template>
+
+                <!-- Supporting Documents -->
+                <div class="documents-section">
+
+                    <div class="section-title">
+                        Supporting Documents
+                    </div>
+
+                    <lightning-file-upload label="Upload Supporting Document" name="permitDocument"
+                        record-id={permit.permitId} accept={acceptedFormats} multiple>
+                    </lightning-file-upload>
+
+                    <div class="help-text">
+                        Upload additional documents related to this permit.
+                    </div>
+
+                </div>
+
+                <!-- Existing Grievances -->
+                <template if:true={hasGrievances}>
+
+                    <div class="grievance-section">
+
+                        <div class="section-title">
+                            Grievance History
+                        </div>
+
+                        <template for:each={permit.grievances} for:item="grievance">
+
+                            <div key={grievance.id} class="grievance-card">
+
+                                <div class="grievance-header">
+
+                                    <strong>
+                                        {grievance.subject}
+                                    </strong>
+
+                                    <span class="grievance-status">
+                                        {grievance.status}
+                                    </span>
+
+                                </div>
+
+                                <div class="grievance-description">
+                                    {grievance.description}
+                                </div>
+
+                                <div class="grievance-date">
+
+                                    Submitted:
+
+                                    <lightning-formatted-date-time value={grievance.submittedDate} year="numeric"
+                                        month="short" day="2-digit">
+                                    </lightning-formatted-date-time>
+
+                                </div>
+
+                                <template if:true={grievance.resolutionNotes}>
+
+                                    <div class="resolution">
+                                        <strong>
+                                            Resolution:
+                                        </strong>
+
+                                        {grievance.resolutionNotes}
+                                    </div>
+
+                                </template>
+
+                            </div>
+
+                        </template>
+
+                    </div>
+
+                </template>
+
+            </template>
+
+        </div>
+
+    </lightning-card>
+
+
+    <!-- Grievance Modal -->
+
+    <template if:true={showGrievanceModal}>
+
+        <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open">
+
+            <div class="slds-modal__container">
+
+                <header class="slds-modal__header">
+
+                    <h2 class="slds-text-heading_medium">
+                        Raise Grievance
+                    </h2>
+
+                </header>
+
+                <div class="slds-modal__content slds-p-around_medium">
+
+                    <lightning-input name="subject" label="Subject" value={grievanceSubject}
+                        onchange={handleGrievanceInput} required>
+                    </lightning-input>
+
+                    <div class="slds-m-top_medium">
+
+                        <lightning-textarea name="description" label="Description" value={grievanceDescription}
+                            onchange={handleGrievanceInput} required>
+                        </lightning-textarea>
+
+                    </div>
+
+                </div>
+
+                <footer class="slds-modal__footer">
+
+                    <lightning-button label="Cancel" onclick={closeGrievanceModal}>
+                    </lightning-button>
+
+                    <lightning-button class="slds-m-left_small" variant="brand" label="Submit Grievance"
+                        onclick={submitGrievance} disabled={isSubmitting}>
+                    </lightning-button>
+
+                </footer>
+
+            </div>
+
+        </section>
+
+        <div class="slds-backdrop slds-backdrop_open"></div>
+
+    </template>
+
+</template>

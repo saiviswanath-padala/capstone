@@ -1,0 +1,350 @@
+<template>
+
+    <lightning-card title="Subsidy Dashboard" icon-name="standard:orders">
+
+        <div class="dashboard">
+
+            <template if:true={isLoading}>
+
+                <lightning-spinner alternative-text="Loading subsidies">
+                </lightning-spinner>
+
+            </template>
+
+
+            <template if:true={errorMessage}>
+
+                <div class="error-box">
+                    {errorMessage}
+                </div>
+
+            </template>
+
+
+            <!-- Dashboard Header -->
+
+            <div class="dashboard-header">
+
+                <div>
+
+                    <div class="dashboard-title">
+                        Cinema Subsidies
+                    </div>
+
+                    <div class="dashboard-subtitle">
+                        Track subsidy requests by category
+                        and approval status.
+                    </div>
+
+                </div>
+
+                <lightning-button variant="brand" label="Request Subsidy" onclick={openRequestModal}>
+                </lightning-button>
+
+            </div>
+
+
+            <!-- Summary -->
+
+            <div class="summary-grid">
+
+                <div class="summary-card">
+
+                    <div class="summary-label">
+                        Total Requests
+                    </div>
+
+                    <div class="summary-value">
+                        {totalSubsidies}
+                    </div>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <div class="summary-label">
+                        Pending
+                    </div>
+
+                    <div class="summary-value">
+                        {pendingCount}
+                    </div>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <div class="summary-label">
+                        Approved
+                    </div>
+
+                    <div class="summary-value">
+                        {approvedCount}
+                    </div>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <div class="summary-label">
+                        Commissioner Review
+                    </div>
+
+                    <div class="summary-value">
+                        {commissionerReviewCount}
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Category Groups -->
+
+            <template if:true={hasGroups}>
+
+                <template for:each={categoryGroups} for:item="group">
+
+                    <section key={group.category} class="category-section">
+
+                        <div class="category-header">
+
+                            <div class="category-title">
+                                {group.category}
+                            </div>
+
+                            <div class="category-count">
+                                {group.count} request(s)
+                            </div>
+
+                        </div>
+
+
+                        <div class="subsidy-grid">
+
+                            <template for:each={group.records} for:item="subsidy">
+
+                                <article key={subsidy.id} class="subsidy-card">
+
+                                    <div class="subsidy-header">
+
+                                        <div>
+
+                                            <div class="subsidy-number">
+                                                {subsidy.subsidyNumber}
+                                            </div>
+
+                                            <div class="permit-number">
+                                                {subsidy.permitApplicationNumber}
+                                            </div>
+
+                                        </div>
+
+                                        <span class={subsidy.statusClass}>
+                                            {subsidy.status}
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="amount-row">
+
+                                        <span>
+                                            Requested
+                                        </span>
+
+                                        <strong>
+
+                                            <lightning-formatted-number value={subsidy.requestedAmount}
+                                                format-style="currency" currency-code="INR">
+                                            </lightning-formatted-number>
+
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div class="subsidy-details">
+
+                                        <div>
+                                            <span class="field-label">
+                                                Request Type
+                                            </span>
+
+                                            <span>
+                                                {subsidy.requestType}
+                                            </span>
+                                        </div>
+
+                                        <div>
+                                            <span class="field-label">
+                                                Eligibility
+                                            </span>
+
+                                            <span>
+                                                {subsidy.eligibilityStatus}
+                                            </span>
+                                        </div>
+
+                                        <div>
+                                            <span class="field-label">
+                                                Approved Amount
+                                            </span>
+
+                                            <span>
+
+                                                <lightning-formatted-number value={subsidy.approvedAmount}
+                                                    format-style="currency" currency-code="INR">
+                                                </lightning-formatted-number>
+
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+
+                                    <template if:true={subsidy.commissionerNotificationRequired}>
+
+                                        <div class="commissioner-alert">
+
+                                            ⚠ Commissioner review required
+
+                                        </div>
+
+                                    </template>
+
+                                </article>
+
+                            </template>
+
+                        </div>
+
+                    </section>
+
+                </template>
+
+            </template>
+
+
+            <template if:false={hasGroups}>
+
+                <div class="empty-state">
+
+                    No subsidy requests are available.
+
+                </div>
+
+            </template>
+
+        </div>
+
+    </lightning-card>
+
+
+    <!-- Request Subsidy Modal -->
+
+    <template if:true={showRequestModal}>
+
+        <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open">
+
+            <div class="slds-modal__container">
+
+                <header class="slds-modal__header">
+
+                    <h2 class="slds-text-heading_medium">
+                        Request Cinema Subsidy
+                    </h2>
+
+                </header>
+
+
+                <div class="slds-modal__content slds-p-around_medium">
+
+
+                    <!-- Permit -->
+
+                    <lightning-combobox name="permit" label="Permit Application" value={requestPermitId}
+                        options={permitOptions} onchange={handleRequestInput} required>
+                    </lightning-combobox>
+
+
+                    <!-- Category -->
+
+                    <div class="slds-m-top_medium">
+
+                        <lightning-combobox name="category" label="Category" value={requestCategory}
+                            options={categoryOptions} onchange={handleRequestInput} required>
+                        </lightning-combobox>
+
+                    </div>
+
+
+                    <!-- Request Type -->
+
+                    <div class="slds-m-top_medium">
+
+                        <lightning-combobox name="requestType" label="Request Type" value={requestType}
+                            options={requestTypeOptions} onchange={handleRequestInput} required>
+                        </lightning-combobox>
+
+                    </div>
+
+
+                    <!-- Amount -->
+
+                    <div class="slds-m-top_medium">
+
+                        <lightning-input name="amount" type="number" label="Requested Amount" value={requestAmount}
+                            min="0" step="0.01" onchange={handleRequestInput} required>
+                        </lightning-input>
+
+                    </div>
+
+
+                    <!-- Date -->
+
+                    <div class="slds-m-top_medium">
+
+                        <lightning-input name="requestedDate" type="date" label="Requested Date" value={requestDate}
+                            onchange={handleRequestInput} required>
+                        </lightning-input>
+
+                    </div>
+
+
+                    <!-- Notes -->
+
+                    <div class="slds-m-top_medium">
+
+                        <lightning-textarea name="notes" label="Notes" value={requestNotes}
+                            onchange={handleRequestInput}>
+                        </lightning-textarea>
+
+                    </div>
+
+                </div>
+
+
+                <footer class="slds-modal__footer">
+
+                    <lightning-button label="Cancel" onclick={closeRequestModal}>
+                    </lightning-button>
+
+                    <lightning-button class="slds-m-left_small" variant="brand" label="Submit Request"
+                        onclick={submitSubsidy} disabled={isSubmitting}>
+                    </lightning-button>
+
+                </footer>
+
+            </div>
+
+        </section>
+
+        <div class="slds-backdrop slds-backdrop_open"></div>
+
+    </template>
+
+</template>

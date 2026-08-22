@@ -1,0 +1,233 @@
+.tracker-container {
+    padding: 1rem;
+    position: relative;
+}
+
+.permit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.section-label {
+    color: #706e6b;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04rem;
+}
+
+.permit-number {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-top: 0.2rem;
+}
+
+.status-badge {
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.status-badge.progress {
+    background: #e8f4ff;
+    color: #0b5cab;
+}
+
+.status-badge.approved {
+    background: #e5f7ed;
+    color: #167d4b;
+}
+
+.status-badge.issued {
+    background: #e8f7f5;
+    color: #087f73;
+}
+
+.status-badge.rejected {
+    background: #fde7e9;
+    color: #ba0517;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.detail-item {
+    border: 1px solid #dddbda;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+}
+
+.label {
+    display: block;
+    color: #706e6b;
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+}
+
+.value {
+    font-weight: 600;
+}
+
+.timeline-section {
+    margin-top: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.section-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.timeline {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 1rem;
+    left: 8%;
+    right: 8%;
+    height: 2px;
+    background: #dddbda;
+    z-index: 0;
+}
+
+.timeline-stage {
+    width: 25%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.stage-circle {
+    width: 2rem;
+    height: 2rem;
+    margin: 0 auto 0.5rem;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid #dddbda;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.timeline-stage.completed .stage-circle {
+    border-color: #2e844a;
+    background: #2e844a;
+    color: white;
+}
+
+.timeline-stage.current .stage-circle {
+    box-shadow: 0 0 0 4px #d8edff;
+}
+
+.stage-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.rejection-box {
+    border: 1px solid #ea001e;
+    background: #fff5f5;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.rejection-title {
+    color: #ba0517;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.rejection-reason {
+    margin-bottom: 1rem;
+}
+
+.documents-section {
+    border-top: 1px solid #dddbda;
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.help-text {
+    margin-top: 0.4rem;
+    color: #706e6b;
+    font-size: 0.75rem;
+}
+
+.grievance-section {
+    border-top: 1px solid #dddbda;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+}
+
+.grievance-card {
+    border: 1px solid #dddbda;
+    border-radius: 0.5rem;
+    padding: 0.8rem;
+    margin-bottom: 0.75rem;
+}
+
+.grievance-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.grievance-status {
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.grievance-description {
+    margin-top: 0.5rem;
+}
+
+.grievance-date {
+    margin-top: 0.5rem;
+    color: #706e6b;
+    font-size: 0.75rem;
+}
+
+.resolution {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #dddbda;
+}
+
+.error-box {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background: #fde7e9;
+    color: #ba0517;
+}
+
+@media (max-width: 768px) {
+
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline {
+        overflow-x: auto;
+    }
+
+    .timeline-stage {
+        min-width: 100px;
+    }
+}
